@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    build: backend
+    build: .
     image: patriciocostilla/challenge-2-backend
     env_file:
       - .env
