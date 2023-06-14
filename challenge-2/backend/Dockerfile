@@ -12,6 +12,8 @@ RUN apt-get update -y -qq && apt-get install -y -qq libgraphviz-dev libpq-dev gc
 
 RUN pip install -r requirements.txt
 
+RUN pip install gunicorn
+
 COPY . /code/
 
 EXPOSE 8000
