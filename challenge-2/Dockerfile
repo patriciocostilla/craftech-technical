@@ -1,3 +1,4 @@
+# Build React project
 FROM node:8.17.0 as webpack
 
 WORKDIR /code
@@ -10,6 +11,7 @@ COPY frontend /code/
 
 RUN npm run build
 
+# Build Django project
 FROM python:3.7
 
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -24,10 +26,9 @@ RUN apt-get update -y -qq && apt-get install -y -qq libgraphviz-dev libpq-dev gc
 
 RUN pip install -r requirements.txt
 
-RUN pip install gunicorn
-
 COPY backend /code/
 
+# Copy React assets from previous step
 COPY --from=webpack /assets /code/assets/
 
 COPY --from=webpack /webpack-stats*.json /code/
@@ -36,4 +37,4 @@ EXPOSE 8000
 
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "backend.wsgi", "-b 0.0.0.0:8000", "-w 2"]
