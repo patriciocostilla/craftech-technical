@@ -1,5 +1,7 @@
 # Challenge 2
 
+> tl;dr: [Ir a la guía de despliegue](#instrucciones-de-despliegue)
+
 ## Introducción/Consideraciones
 
 La aplicación consta de dos componentes principales:
@@ -152,3 +154,11 @@ En el archivo values.yaml se pueden modificar varios parámetros del despliegue,
 11. Configuración inicial de la instancia de PostgreSQL
 
 Respecto a los valores del Secret y la configuración de PostgreSQL, Helm admite que se sobreescriban los valores por defecto del chart. Con esto, se puede asegurar que los valores secretos se provean al momento de desplegar en cada entorno sin necesidad de incluirlos en el código base del chart. 
+
+## Instrucciones de despliegue
+
+### Despliegue con docker-compose
+
+### Despliegue con Kubernetes + Helm
+
+### Despliegue en entorno cloud
