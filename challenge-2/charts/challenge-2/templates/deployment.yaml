@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -47,6 +47,49 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: SECRET_KEY
+                  optional: false
+            - name: DB_ENGINE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: DB_ENGINE
+                  optional: false
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: DB_NAME
+                  optional: false
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: DB_USER
+                  optional: false
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: DB_PASS
+                  optional: false
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: DB_HOST
+                  optional: false
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "challenge-2.fullname" . }}
+                  key: DB_PORT
+                  optional: false
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
