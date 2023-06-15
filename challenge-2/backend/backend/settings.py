@@ -239,3 +239,5 @@ WEBPACK_LOADER = {
 
 if env("ENVIRONMENT", "local") != 'local':
     COMPRESS_OFFLINE = True
+
+SITE_ID = 1
