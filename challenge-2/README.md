@@ -129,3 +129,26 @@ Para ejecutar el proyecto en modo desarrollo, se puede utilizar `docker-compose`
 
 Para un despliegue en un entorno productivo, es necesario utilizar una herramienta de orquestación de contenedores. En este caso utilizaremos Kubernetes y Helm. De esta forma, se va a generar un *chart* de Helm para el despliegue de la aplicación. 
 
+El chart realiza un despliegue de los siguientes componentes en un clúster de Kubernetes:
+
+* Deployment del contenedor de la aplicación
+* Service para exponer el Deployment dentro del cluster
+* ConfigMap con los valores de las variables de entorno de la aplicación
+* Secret con los valores secretos de las variables de entorno de la aplicación
+* Ingress para exponer el Service hacia fuera del cluster
+* HorizontalPodAutoscaler para controlar el escalamiento bajo demanda de la aplicación
+* ServiceAccount
+
+En el archivo values.yaml se pueden modificar varios parámetros del despliegue, entre ellos resaltamos
+
+1. Cantidad de réplicas del Deployment
+2. Repositorio/Nombre de imagen a utilizar en el Deployment, así como el tag correspondiente y la política de actualización de la misma.
+3. Valores secretos para la descarga de la imagen, si los hubiera
+6. Configuración del Service
+7. Configuración del Ingress
+8. Asignación de recursos de CPU y Memoria
+9. Configuración del HorizontalPodAutoscaler
+10. Valores del Secret
+11. Configuración inicial de la instancia de PostgreSQL
+
+Respecto a los valores del Secret y la configuración de PostgreSQL, Helm admite que se sobreescriban los valores por defecto del chart. Con esto, se puede asegurar que los valores secretos se provean al momento de desplegar en cada entorno sin necesidad de incluirlos en el código base del chart. 
