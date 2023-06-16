@@ -159,6 +159,32 @@ Respecto a los valores del Secret y la configuración de PostgreSQL, Helm admite
 
 ### Despliegue con docker-compose
 
+**Requerimientos previos:** Contar con una instalación local (o acceso a una instalación remota) de Docker, y tener instalados la CLI de `docker` el binario de `docker-compose`.
+
+1. Clonar este repositorio
+2. Posicionarse en la carpeta `challenge-2`
+3. Generar el archivo `.env` a partir del archivo de ejemplo `.env.example`
+   1. Revisar la definición de las variables de entorno en [la sección Variables de entorno](#variables-de-entorno)
+4. (opcional) Generar el archivo `docker-compose.override.yml` con los ajustes necesarios para este despliegue (se deja un ejemplo para un entorno de desarrollo).
+5. Descargar imágenes y realizar una build local del proyecto: `docker-compose pull && docker-compose build`.
+6. Inicializar el proyecto `docker compose up`
+   1. En caso de un despliegue de producción, se puede iniciar el proyecto en segundo plano agregando el flag `-d` al comando anterior.
+
+Para eliminar el proyecto, simplemente detenerlo utilizando el comando `docker-compose down`, que detiene y elimina los contenedores del proyecto. Adicionalmente, se puede pasar el flag `--volumes` al comando anterior para eliminar el volumen de persistencia de datos de la BD. 
+
 ### Despliegue con Kubernetes + Helm
 
+**Requerimientos previos:** Contar con una instalación local (o acceso a una instalación remota) de Kubernetes, y tener instalados los binarios de `kubectl` y `helm`. También, contar con acceso al repositorio de la imagen del contenedor de la aplicación (revisar el paso 3 para modificar el repositorio). El cluster debe contar con un Ingress habilitado para permitir el acceso desde el exterior a la aplicación (por defecto el ingress es `nginx`)
+
+1. Clonar este repositorio
+2. Posicionarse en la carpeta `challenge-2/charts`
+3. Realizar un despliegue del helmchart correspondiente: `helm install <release_name> challenge-2/`.
+   1. (opcional) Realizar un override de los valores por defecto del chart según el entorno de despliegue, [ya sea proporcionando un nuevo archivo `values.yaml` o indicando valores puntuales con el flag `--set`](https://helm.sh/docs/chart_template_guide/values_files/).
+
+Para desinstalar el chart, simplemente ejecutar el comando `helm uninstall <release_name>`. Adicionalmente, es necesario eliminar el objeto PVC de Kubernetes asociado a la instalación de PostgreSQL, si es que se desea eliminar los datos persistidos.
+
 ### Despliegue en entorno cloud
+
+**Requerimientos previos:** Contar con acceso a una instancia de EKS (AWS) o GKE (GCP), además de los requerimientos previos indicados en la [sección anterior](#despliegue-con-kubernetes--helm). 
+
+1. Realizar los pasos indicados en la [sección anterior](#despliegue-con-kubernetes--helm).
