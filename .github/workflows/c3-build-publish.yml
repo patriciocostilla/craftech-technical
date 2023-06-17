@@ -19,8 +19,19 @@ jobs:
       - uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/challenge-3-app
+          tags: ${{ secrets.DOCKER_USER }}/challenge-3-app:latest
           context: challenge-3
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GCP_SA }}
+      - uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          image: 'docker.io/${{ secrets.DOCKER_USER }}/challenge-3-app:latest'
+          service: 'challenge-3-app'
+
 
 
 
