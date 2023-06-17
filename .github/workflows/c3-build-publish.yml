@@ -23,6 +23,7 @@ jobs:
           context: challenge-3
   deploy:
     runs-on: ubuntu-22.04
+    needs: [build-and-publish]
     steps:
       - uses: 'google-github-actions/auth@v1'
         with:
