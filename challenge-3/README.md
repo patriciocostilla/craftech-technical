@@ -10,6 +10,44 @@ Luego, se pide que se implemente un esquema de CI/CD de forma tal que al enviar 
 
 Construiremos una nueva imagen basada en NGINX, a la cual le sobreescribiremos el archivo `/usr/share/nginx/html/index.html` con una nueva versión, como se puede observar en el Dockerfile del proyecto. 
 
+El `index.html` original extraído directamente desde la imagen de NGINX:
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to nginx!</title>
+    <style>
+        html {
+            color-scheme: light dark;
+        }
+
+        body {
+            width: 35em;
+            margin: 0 auto;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to nginx!</h1>
+    <p>If you see this page, the nginx web server is successfully installed and
+        working. Further configuration is required.</p>
+
+    <p>For online documentation and support please refer to
+        <a href="http://nginx.org/">nginx.org</a>.<br />
+        Commercial support is available at
+        <a href="http://nginx.com/">nginx.com</a>.
+    </p>
+
+    <p><em>Thank you for using nginx.</em></p>
+</body>
+
+</html>
+```
+
 ## Esquema de CI/CD
 
 Se trabajó con **Github Actions** como herramienta de integración continua, **Dockerhub** como repositorio de imágenes de contenedores, y **Google Cloud Run (GCP)** como entorno de despliegue. Este proceso se ejecuta cada vez que se realiza una modificación en el repositorio (puntualmente en la carpeta del tercer desafío) y consta de los siguientes pasos
