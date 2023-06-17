@@ -12,13 +12,14 @@ Construiremos una nueva imagen basada en NGINX, a la cual le sobreescribiremos e
 
 ## Esquema de CI/CD
 
-**IMAGEN**
-
 Se trabajó con **Github Actions** como herramienta de integración continua, **Dockerhub** como repositorio de imágenes de contenedores, y **Google Cloud Run (GCP)** como entorno de despliegue. Este proceso se ejecuta cada vez que se realiza una modificación en el repositorio (puntualmente en la carpeta del tercer desafío) y consta de los siguientes pasos
 
-1. Realizar una construcción de la nueva imagen de Docker.
-1. Publicar la imagen generada en el paso anterior en Dockerhub.
-1. Generar una nueva revisión del servicio creado en Google Cloud Run, basada en la imagen públicada en el paso anterior.
+1. El usuario envía un cambio al repositorio.
+1. Se realiza construcción de la nueva imagen de Docker.
+1. Se publica la imagen generada en el paso anterior en Dockerhub.
+1. Se genera una nueva revisión del servicio creado en Google Cloud Run, basada en la imagen públicada en el paso anterior.
+
+![Esquema de CICD](imgs/CICD.jpg "Esquema de CI/CD")
 
 ### Consideraciones
 
