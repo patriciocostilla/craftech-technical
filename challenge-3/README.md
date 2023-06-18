@@ -57,6 +57,8 @@ Se trabajó con **Github Actions** como herramienta de integración continua, **
 1. Se publica la imagen generada en el paso anterior en Dockerhub.
 1. Se genera una nueva revisión del servicio creado en Google Cloud Run, basada en la imagen públicada en el paso anterior.
 
+Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build-publish.yml](../.github/workflows/c3-build-publish.yml).
+
 ![Esquema de CICD](imgs/CICD.jpg "Esquema de CI/CD")
 
 ### Consideraciones
