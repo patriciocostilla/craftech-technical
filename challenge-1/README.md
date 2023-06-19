@@ -26,7 +26,7 @@ Las flotas de servidores (web y de aplicación) y las bases de datos se organiza
 
 Adicionalmente, y aunque no se encuentra aclarado en el gráfico, los nodos correspondientes del servicio de **Elastic Load Balancing** se encuentran dentro de una *subnet* pública, de forma tal que se pueden acceder desde el exterior. 
 
-También, se habilita la protección DDoS a través de `AWS Shield`, para proteger la implementación de forma automática contra ataques de este tipo. 
+También, se habilita la protección DDoS a través de **AWS Shield**, para proteger la implementación de forma automática contra ataques de este tipo. 
 
 ## Referencias
 
