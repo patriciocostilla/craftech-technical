@@ -8,7 +8,9 @@
   * El **backend** (`api.myapp.com`) consiste de un servidor de aplicación (desarrollado con una tecnología a definir) que se expone a internet a través de un servidor web (por ejemplo NGINX).
 * El modelo implementado se basa en un whitepaper ofrecido por AWS, dónde se detalla una alternativa de implementación para una aplicación web, comparando la misma con su contraparte en un entorno on-premise “tradicional”.
 
-## Arquitectura implementada
+## Arquitectura propuesta
+
+> [Ir al diagrama](#diagrama-de-red)
 
 Cuando un cliente envía una petición a la aplicación, se utiliza **Route 53** como servidor de nombres de DNS para resolver a dónde dirigirla. En cualquiera de los dos casos, se analiza la petición con un **Web Application Firewall**, para tratar de detectar y mitigar posibles ataques antes de gestionar las peticiones correspondientes.
 
@@ -28,3 +30,7 @@ Adicionalmente, y aunque no se encuentra aclarado en el gráfico, los nodos corr
 
 * https://docs.aws.amazon.com/pdfs/whitepapers/latest/web-application-hosting-best-practices/web-application-hosting-best-practices.pdf#welcome
 * https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html
+
+## Diagrama de red
+
+![Diagrama de Red desafío 1](challenge-1.png)
