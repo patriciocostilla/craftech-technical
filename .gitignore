@@ -1,6 +1,0 @@
-.env
-docker-compose.override.yml
-challenge-2/assets
-challenge-2/webpack-stats.*.json
-
-*.tgz

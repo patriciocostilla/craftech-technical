@@ -1,0 +1,6 @@
+.env
+docker-compose.override.yml
+assets
+webpack-stats.*.json
+
+*.tgz
