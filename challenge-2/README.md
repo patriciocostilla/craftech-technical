@@ -68,11 +68,11 @@ De esta forma, el proceso de despliegue de la aplicación se puede resumir de la
 
 **Nota:** Para la ejecución del proyecto de Django y la conexión con la BD, se debe contar con los siguientes paquetes instalados en el sistema: 
 
-* libgraphviz-dev 
-* libpq-dev 
-* gcc 
-* python3-dev 
-* musl-dev
+* `libgraphviz-dev` 
+* `libpq-dev` 
+* `gcc` 
+* `python3-dev` 
+* `musl-dev`
 
 ## Variables de entorno
 
