@@ -50,6 +50,8 @@ El `index.html` original extraído directamente desde la imagen de NGINX:
 
 ## Esquema de CI/CD
 
+> [Ver el diagrama](#diagrama)
+
 Se trabajó con **Github Actions** como herramienta de integración continua, **Dockerhub** como repositorio de imágenes de contenedores, y **Google Cloud Run (GCP)** como entorno de despliegue. Este proceso se ejecuta cada vez que se realiza una modificación en el repositorio (puntualmente en la carpeta del tercer desafío) y consta de los siguientes pasos
 
 1. El usuario envía un cambio al repositorio.
@@ -59,7 +61,23 @@ Se trabajó con **Github Actions** como herramienta de integración continua, **
 
 Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build-publish.yml](../.github/workflows/c3-build-publish.yml).
 
-![Esquema de CICD](imgs/CICD.jpg "Esquema de CI/CD")
+### Requerimientos/Configuración
+
+Si revisamos el archivo [c3-build-publish.yml](../.github/workflows/c3-build-publish.yml) podemos ver que el pipeline requiere, para su correcto funcionamiento, de lo siguiente:
+
+1. Una cuenta de Dockerhub con acceso a un repositorio dónde enviar la imagen construida, llamado `challenge-3-app`.
+2. Un archivo JSON de credenciales que permitan acceso a una cuenta de GCP
+3. La cuenta de GCP debe tener configurado un proyecto de Cloud Run con el nombre `challenge-3-app`.
+
+Para que el ejecutar del proceso de CI/CD se pueda conectar satisfactoriamente, necesitamos generar los siguientes secretos en el repositorio:
+
+| Secreto       | Descripción                                       |
+| ------------- | ------------------------------------------------- |
+| `DOCKER_USER` | Nombre de usuario de Dockerhub                    |
+| `DOCKER_PAT`  | Un Personal Acces Token de Dockerhub              |
+| `GCP_SA`      | Archivo JSON con las credenciales de acceso a GCP |
+
+En el caso de las credenciales de acceso a GCP, si revisamos la documentación del action `google-github-actions/deploy-cloudrun@v1` se establece que las credenciales deben corresponder a una cuenta de servicio con el rol `Cloud Run Admin` y que además sea miembro de la cuenta de servicio `Compute Engine default service account` con el rol de `Service Account User`. Esta configuración se debe establecer desde la consola de GCP.
 
 ### Consideraciones
 
@@ -68,3 +86,7 @@ Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build
 * Se utiliza Dockerhub como repositorio de imágenes ya que se pueden crear imagenes públicas sin costo. 
 * Se utiliza Google Cloud Run como entorno de ejecución ya que permite la ejecución y publicación de servicios basados en contenedores de forma directa. Como la aplicación a desplegar solamente cuenta con un contenedor, no se requiere de un entorno de orquestación de contenedores. 
     * Además, es posible acceder a una versión de prueba gratuita de la misma. 
+
+### Diagrama 
+
+![Esquema de CICD](imgs/CICD.jpg "Esquema de CI/CD")
