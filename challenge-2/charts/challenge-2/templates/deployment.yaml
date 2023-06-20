@@ -22,7 +22,7 @@ spec:
     spec:
       initContainers:
       - name: check-db-ready
-        image: postgres:12.5.7
+        image: postgres:12.5
         command: ['sh', '-c', 
           'until pg_isready -h ${DB_HOST} -p 5432; 
           do echo waiting for database; sleep 2; done;']
