@@ -1,5 +1,7 @@
 # Challenge 3
 
+> Quiero ver el sitio desplegado: [https://challenge-3-app-to5uzvhuqq-uc.a.run.app](https://challenge-3-app-to5uzvhuqq-uc.a.run.app)
+
 ## Introducción
 
 El objetivo del desafío es generar una imagen de contenedor de NGINX, con el agregado de que se debe modificar el archivo `index.html` que muestra en su configuración por defecto. 
@@ -59,7 +61,9 @@ Se trabajó con **Github Actions** como herramienta de integración continua, **
 1. Se publica la imagen generada en el paso anterior en Dockerhub.
 1. Se genera una nueva revisión del servicio creado en Google Cloud Run, basada en la imagen públicada en el paso anterior.
 
-Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build-publish-deploy.yml](../.github/workflows/c3-build-publish-deploy.yml).
+Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build-publish-deploy.yml](../.github/workflows/c3-build-publish-deploy.yml). 
+
+Además, se puede acceder al sitio desplegado [a través del siguiente enlace](https://challenge-3-app-to5uzvhuqq-uc.a.run.app)
 
 ### Requerimientos/Configuración
 
