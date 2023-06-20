@@ -164,7 +164,7 @@ Respecto a los valores del `Secret` y la configuración de PostgreSQL, Helm admi
 ## Mejoras a incorporar
 
 * Con la implementación actual, se tiene que asegurar que la versión de PostgreSQL referenciada en el `initContainer` del `Deployment` del proyecto coincida con la versión especificada en las dependencias del helm chart. Si bien esto no es obligatorio, es deseable que se utilice la misma versión para evitar problemas.
-* El valor de la variable `db_host` en el archivo values.yaml tiene *hardcodeado* el prefijo que Helm inserta de forma automática referenciando el nombre de la *release* (challenge-2). 
+* El valor de la variable `db_host` en el archivo values.yaml tiene *hardcodeado* el prefijo que Helm inserta de forma automática referenciando el nombre de la *release* (`challenge-2`). 
   * Esto quiere decir que si se quiere usar un nombre de *release* diferente, se tiene que modificar este valor de forma acorde. 
 
 ## Instrucciones de despliegue
