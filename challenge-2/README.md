@@ -76,17 +76,17 @@ De esta forma, el proceso de despliegue de la aplicación se puede resumir de la
 
 ## Variables de entorno
 
-| Variable     | Descripción                   | Ejemplo                         |
-| ------------ | ----------------------------- | ------------------------------- |
-| SECRET_KEY   | Valor secreto de Django       | `6p4kr_5jyhnui67s*_...`         |
-| DJANGO_DEBUG | Ejecutar Django en modo DEBUG | `True` o `False`                |
-| ENVIRONMENT  | Entorno de ejecución          | `prod` o `local`                |
-| DB_ENGINE    | Motor de BD a utilizar (*)    | `django.db.backends.postgresql` |
-| DB_NAME      | Nombre de la BD a utilizar    | `my_database`                   |
-| DB_USER      | Nombre de usuario de la BD    | `my_user`                       |
-| DB_PASS      | Contraseña de la BD           | `p455w0rd`                      |
-| DB_HOST      | Nombre del host de la BD      | `localhost`                     |
-| DB_PORT      | Puerto de conexión de la BD   | `5432`                          |
+| Variable       | Descripción                   | Ejemplo                         |
+| -------------- | ----------------------------- | ------------------------------- |
+| `SECRET_KEY`   | Valor secreto de Django       | `6p4kr_5jyhnui67s*_...`         |
+| `DJANGO_DEBUG` | Ejecutar Django en modo DEBUG | `True` o `False`                |
+| `ENVIRONMENT`  | Entorno de ejecución          | `prod` o `local`                |
+| `DB_ENGINE`    | Motor de BD a utilizar (*)    | `django.db.backends.postgresql` |
+| `DB_NAME`      | Nombre de la BD a utilizar    | `my_database`                   |
+| `DB_USER`      | Nombre de usuario de la BD    | `my_user`                       |
+| `DB_PASS`      | Contraseña de la BD           | `p455w0rd`                      |
+| `DB_HOST`      | Nombre del host de la BD      | `localhost`                     |
+| `DB_PORT`      | Puerto de conexión de la BD   | `5432`                          |
 
 (*) Revisar los motores de bases de datos disponibles en: https://docs.djangoproject.com/en/2.1/ref/settings/#std-setting-DATABASES
 
