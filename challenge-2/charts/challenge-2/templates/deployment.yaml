@@ -20,6 +20,15 @@ spec:
       labels:
         {{- include "challenge-2.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+      - name: check-db-ready
+        image: postgres:12.5.7
+        command: ['sh', '-c', 
+          'until pg_isready -h ${DB_HOST} -p 5432; 
+          do echo waiting for database; sleep 2; done;']
+        envFrom:
+          - secretRef:
+              name: {{ include "challenge-2.fullname" . }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
