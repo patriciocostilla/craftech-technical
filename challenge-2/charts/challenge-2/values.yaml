@@ -86,7 +86,7 @@ affinity: {}
 secret:
   secret_key: "6p4kr_5jyhnui67s*_=e696l_bgksd&)87$%b8cycet6-sm8w("
   db_engine: "django.db.backends.postgresql"
-  db_host: "challenge-2-postgresql.default.svc.cluster.local"
+  db_host: "challenge-2-postgresql"
   db_port: "5432"
 
 configmap:
