@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: patriciocostilla/challenge-3-app
+    ports:
+      - 8080:80
