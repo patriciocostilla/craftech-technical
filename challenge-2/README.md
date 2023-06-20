@@ -94,8 +94,11 @@ De esta forma, el proceso de despliegue de la aplicación se puede resumir de la
 
 Durante la revisión del código de ambos proyectos, se detectó que eran necesarios dos ajustes para garantizar el correcto funcionamiento del mismo:
 
-1. **Modificar la configuración de producción de Webpack para el proyecto de React**. En la línea 20 del archivo `webpack.config.prod.js` se establecía que la URL pública de los archivos generados sería `/static/public_bundles/`. Este valor debe coincidir con la configuración establecida en el proyecto de Django (mostrada en los bloques de código anteriores) para garantizar que los archivos estáticos se puedan servir de forma correcta. Por lo tanto, se decidió actualizar el valor correspondiente a `/static/bundles/`
-1. **Establecer un valor de `Site` por defecto para el proyecto de Django**. Este proyecto cuenta con el módulo de sitios habilitado (se puede ver ya que tiene instalada la app `django.contrib.sites`). Este módulo permite la gestión de diferentes sitios dentro de un solo proyecto de Django, que compartan un mismo depósito de datos. Sin embargo, el proyecto tiene solamente el sitio por defecto habilitado (originalmente example.com), y es necesario indicar que se quiere utilizar el mismo para poder visualizar correctamente el proyecto en modo de desarrollo. Para esto, se agregó en el archivo `settings.py` la constante correspondiente: `SITE_ID = 1`.
+1. **Modificar la configuración de producción de Webpack para el proyecto de React**. En la línea 20 del archivo `webpack.config.prod.js` se establecía que la URL pública de los archivos generados sería `/static/public_bundles/`. Este valor debe coincidir con la configuración establecida en el proyecto de Django (mostrada en los bloques de código anteriores) para garantizar que los archivos estáticos se puedan servir de forma correcta. Por lo tanto, se decidió actualizar el valor correspondiente a `/static/bundles/`.
+2. **Corregir la URL de la API en el frontend:** El proyecto tenía hardcodeada la URL de la API para ciertas acciones. Esto se puede ver en el archivo `src/views/RequestsLoan/actions/requests.js` del proyecto del frontend. Para corregir esta situación, fue necesario indicar al momento de realizar una build el valor de la variable `ENDPOINT`.
+   1. Se agregó el archivo `env.production` con la variable `REACT_APP_API_URL` para el proyecto del frontend. Como el frontend se sirve a través del backend, alcanza con indicar el valor `/api` para dicha variable.
+   2. Se modificó el código del archivo `requests.js` para utilizar el valor de la variable de entorno, dejando como valor por defecto el que se encontraba originalmente. 
+3. **Establecer un valor de `Site` por defecto para el proyecto de Django**. Este proyecto cuenta con el módulo de sitios habilitado (se puede ver ya que tiene instalada la app `django.contrib.sites`). Este módulo permite la gestión de diferentes sitios dentro de un solo proyecto de Django, que compartan un mismo depósito de datos. Sin embargo, el proyecto tiene solamente el sitio por defecto habilitado (originalmente example.com), y es necesario indicar que se quiere utilizar el mismo para poder visualizar correctamente el proyecto en modo de desarrollo. Para esto, se agregó en el archivo `settings.py` la constante correspondiente: `SITE_ID = 1`.
 
 ## Despliegue con Docker
 
@@ -145,23 +148,23 @@ El Deployment del contenedor de la aplicación incluye la definición de un init
 
 En el archivo values.yaml se pueden modificar varios parámetros del despliegue, entre ellos resaltamos
 
-1. Cantidad de réplicas del Deployment
-2. Repositorio/Nombre de imagen a utilizar en el Deployment, así como el tag correspondiente y la política de actualización de la misma.
+1. Cantidad de réplicas del `Deployment`
+2. Repositorio/Nombre de imagen a utilizar en el `Deployment`, así como el tag correspondiente y la política de actualización de la misma.
 3. Valores secretos para la descarga de la imagen, si los hubiera
-4. Configuración del Service
-5. Configuración del Ingress
+4. Configuración del `Service`
+5. Configuración del `Ingress`
 6. Asignación de recursos de CPU y Memoria
-7. Configuración del HorizontalPodAutoscaler
-8. Valores del Secret
+7. Configuración del `HorizontalPodAutoscaler`
+8. Valores del `Secret`
 9. Configuración inicial de la instancia de PostgreSQL
 
-Respecto a los valores del Secret y la configuración de PostgreSQL, Helm admite que se sobreescriban los valores por defecto del chart. Con esto, se puede asegurar que los valores secretos se provean al momento de desplegar en cada entorno sin necesidad de incluirlos en el código base del chart. 
+Respecto a los valores del `Secret` y la configuración de PostgreSQL, Helm admite que se sobreescriban los valores por defecto del chart. Con esto, se puede asegurar que los valores secretos se provean al momento de desplegar en cada entorno sin necesidad de incluirlos en el código base del chart. 
 
 ## Mejoras a incorporar
 
-* Con la implementación actual, se tiene que asegurar que la versión de PostgreSQL referenciada en el initContainer del Deployment del proyecto coincida con la versión especificada en las dependencias del helm chart. Si bien esto no es obligatorio, es deseable que se utilice la misma versión para evitar problemas.
-* El valor de la variable `db_host` en el archivo values.yaml tiene hardcodeado el prefijo que Helm inserta de forma automática referenciando el nombre de la release (challenge-2). 
-  * Esto quiere decir que si se quiere usar un nombre de release diferente, se tiene que modificar este valor de forma acorde. 
+* Con la implementación actual, se tiene que asegurar que la versión de PostgreSQL referenciada en el `initContainer` del `Deployment` del proyecto coincida con la versión especificada en las dependencias del helm chart. Si bien esto no es obligatorio, es deseable que se utilice la misma versión para evitar problemas.
+* El valor de la variable `db_host` en el archivo values.yaml tiene *hardcodeado* el prefijo que Helm inserta de forma automática referenciando el nombre de la *release* (challenge-2). 
+  * Esto quiere decir que si se quiere usar un nombre de *release* diferente, se tiene que modificar este valor de forma acorde. 
 
 ## Instrucciones de despliegue
 
