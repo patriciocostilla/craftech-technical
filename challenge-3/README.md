@@ -87,6 +87,15 @@ En el caso de las credenciales de acceso a GCP, si revisamos la documentación d
 * Se utiliza Google Cloud Run como entorno de ejecución ya que permite la ejecución y publicación de servicios basados en contenedores de forma directa. Como la aplicación a desplegar solamente cuenta con un contenedor, no se requiere de un entorno de orquestación de contenedores. 
     * Además, es posible acceder a una versión de prueba gratuita de la misma. 
 
-### Diagrama 
+## Ejecución local
+
+1. Clonar este repositorio
+2. Posicionarse en la carpeta `challenge-3`
+3. Descargar imágenes y realizar una build local del proyecto: `docker-compose pull && docker-compose build`.
+4. Inicializar el proyecto `docker compose up`.
+   1. Se puede iniciar el proyecto en segundo plano agregando el flag `-d` al comando anterior.
+5. Acceder a través de un navegador web: `http://localhost:8080`.
+
+## Diagrama 
 
 ![Esquema de CICD](imgs/CICD.jpg "Esquema de CI/CD")
