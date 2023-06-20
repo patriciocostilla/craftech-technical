@@ -152,10 +152,16 @@ En el archivo values.yaml se pueden modificar varios parámetros del despliegue,
 5. Configuración del Ingress
 6. Asignación de recursos de CPU y Memoria
 7. Configuración del HorizontalPodAutoscaler
-8.  Valores del Secret
-9.  Configuración inicial de la instancia de PostgreSQL
+8. Valores del Secret
+9. Configuración inicial de la instancia de PostgreSQL
 
 Respecto a los valores del Secret y la configuración de PostgreSQL, Helm admite que se sobreescriban los valores por defecto del chart. Con esto, se puede asegurar que los valores secretos se provean al momento de desplegar en cada entorno sin necesidad de incluirlos en el código base del chart. 
+
+## Mejoras a incorporar
+
+* Con la implementación actual, se tiene que asegurar que la versión de PostgreSQL referenciada en el initContainer del Deployment del proyecto coincida con la versión especificada en las dependencias del helm chart. Si bien esto no es obligatorio, es deseable que se utilice la misma versión para evitar problemas.
+* El valor de la variable `db_host` en el archivo values.yaml tiene hardcodeado el prefijo que Helm inserta de forma automática referenciando el nombre de la release (challenge-2). 
+  * Esto quiere decir que si se quiere usar un nombre de release diferente, se tiene que modificar este valor de forma acorde. 
 
 ## Instrucciones de despliegue
 
@@ -180,10 +186,17 @@ Para eliminar el proyecto, simplemente detenerlo utilizando el comando `docker-c
 
 1. Clonar este repositorio
 2. Posicionarse en la carpeta `challenge-2/charts`
-3. Realizar un despliegue del helmchart correspondiente: `helm install <release_name> challenge-2/`.
+3. Realizar un despliegue del helmchart correspondiente: `helm install challenge-2 challenge-2/`.
    1. (opcional) Realizar un override de los valores por defecto del chart según el entorno de despliegue, [ya sea proporcionando un nuevo archivo `values.yaml` o indicando valores puntuales con el flag `--set`](https://helm.sh/docs/chart_template_guide/values_files/).
 
-Para desinstalar el chart, simplemente ejecutar el comando `helm uninstall <release_name>`. Adicionalmente, es necesario eliminar el objeto PVC de Kubernetes asociado a la instalación de PostgreSQL, si es que se desea eliminar los datos persistidos.
+Para desinstalar el chart, simplemente ejecutar el comando `helm uninstall challenge-2`. Adicionalmente, es necesario eliminar el objeto PVC de Kubernetes asociado a la instalación de PostgreSQL, si es que se desea eliminar los datos persistidos.
+
+**Nota:** Para instalar en un `namespace` de Kubernetes diferente al `default`, simplemente se debe crear el `namespace` nuevo e indicarlo durante la instalación del helm chart, por ejemplo:
+
+1. `kubectl create ns challenge-2`
+2. `helm install challenge-2 challenge-2/ --namespace challenge-2`
+
+De la misma forma, para desinstalar el chart se debería ejecutar: `helm uninstall challenge-2 --namespace challenge-2`
 
 ### Despliegue en entorno cloud
 
