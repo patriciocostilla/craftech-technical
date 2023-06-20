@@ -59,11 +59,11 @@ Se trabajó con **Github Actions** como herramienta de integración continua, **
 1. Se publica la imagen generada en el paso anterior en Dockerhub.
 1. Se genera una nueva revisión del servicio creado en Google Cloud Run, basada en la imagen públicada en el paso anterior.
 
-Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build-publish.yml](../.github/workflows/c3-build-publish.yml).
+Se puede revisar la implementación del esquema de CI/CD en el archivo [c3-build-publish-deploy.yml](../.github/workflows/c3-build-publish-deploy.yml).
 
 ### Requerimientos/Configuración
 
-Si revisamos el archivo [c3-build-publish.yml](../.github/workflows/c3-build-publish.yml) podemos ver que el pipeline requiere, para su correcto funcionamiento, de lo siguiente:
+Si revisamos el archivo [c3-build-publish-deploy.yml](../.github/workflows/c3-build-publish-deploy.yml) podemos ver que el pipeline requiere, para su correcto funcionamiento, de lo siguiente:
 
 1. Una cuenta de Dockerhub con acceso a un repositorio dónde enviar la imagen construida, llamado `challenge-3-app`.
 2. Un archivo JSON de credenciales que permitan acceso a una cuenta de GCP
