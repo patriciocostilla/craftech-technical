@@ -88,7 +88,7 @@ De esta forma, el proceso de despliegue de la aplicación se puede resumir de la
 | DB_HOST      | Nombre del host de la BD      | `localhost`                     |
 | DB_PORT      | Puerto de conexión de la BD   | `5432`                          |
 
-(*) Revisar los motores de basos de datos disponibles en: https://docs.djangoproject.com/en/2.1/ref/settings/#std-setting-DATABASES
+(*) Revisar los motores de bases de datos disponibles en: https://docs.djangoproject.com/en/2.1/ref/settings/#std-setting-DATABASES
 
 ## Ajustes realizados al código
 
