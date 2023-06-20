@@ -1,6 +1,6 @@
 import { message } from 'antd';
 
-const ENDPOINT = 'http://0.0.0.0:8000/api/requests-loan/';
+const ENDPOINT = (process.env.REACT_APP_API_URL || 'http://0.0.0.0:8000/api' ) + '/requests-loan/';
 
 
 export const list = (params) => {
