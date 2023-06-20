@@ -1,4 +1,4 @@
-name: Build the 3rd challenge project and push it to Dockerhub
+name: Build the 2nd challenge project and push it to Dockerhub
 run-name: ${{ github.actor }}
 on: 
   push:
