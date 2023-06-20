@@ -188,9 +188,12 @@ Para eliminar el proyecto, simplemente detenerlo utilizando el comando `docker-c
 
 **Requerimientos previos:** Contar con una instalación local (o acceso a una instalación remota) de Kubernetes, y tener instalados los binarios de `kubectl` y `helm`. También, contar con acceso al repositorio de la imagen del contenedor de la aplicación (revisar el paso 3 para modificar el repositorio). El cluster debe contar con un Ingress habilitado para permitir el acceso desde el exterior a la aplicación (por defecto el ingress es `nginx`)
 
-1. Clonar este repositorio
-2. Posicionarse en la carpeta `challenge-2/charts`
-3. Realizar un despliegue del helmchart correspondiente: `helm install challenge-2 challenge-2/`.
+1. Clonar este repositorio.
+2. Posicionarse en la carpeta `challenge-2/charts/challenge-2`.
+3. Agregar el repositorio de Bitnami para descargar las dependencias del proyecto: `helm repo add bitnami https://charts.bitnami.com/bitnami`.
+4. Descargar dependencias del helm chart: `helm dependency build`.
+5. Posicionarse en la carpeta `challenge-2/charts`.
+6. Realizar un despliegue del helm chart correspondiente: `helm install challenge-2 challenge-2/`.
    1. (opcional) Realizar un override de los valores por defecto del chart según el entorno de despliegue, [ya sea proporcionando un nuevo archivo `values.yaml` o indicando valores puntuales con el flag `--set`](https://helm.sh/docs/chart_template_guide/values_files/).
 
 Para desinstalar el chart, simplemente ejecutar el comando `helm uninstall challenge-2`. Adicionalmente, es necesario eliminar el objeto PVC de Kubernetes asociado a la instalación de PostgreSQL, si es que se desea eliminar los datos persistidos.
