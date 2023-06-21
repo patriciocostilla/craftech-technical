@@ -219,7 +219,7 @@ A manera de ejemplo, realizaremos un despliegue utilizando GKE. Para esto, prime
 5. Instalar los componentes necesarios para conectarse a GKE desde `gcloud`:
    1. `gcloud components install gke-gcloud-auth-plugin`
 6. Configurar la conexión con el cluster de GKE: `gcloud container clusters get-credentials CLUSTER_NAME --region=COMPUTE_REGION`.
-   1. A partir de este momento, podemos verificar con `kubectx` que tenemos acceso al cluster de GKE desde el entorno local. Por ejemplo:
+   1. A partir de este momento, podemos verificar con `kubectx` que tenemos acceso al cluster de GKE desde el entorno local. 
 7. Ahora, podemos desplegar nuestra aplicación utilizando Helm desde la consola local.
    1. Creamos el namespace para la aplicación: `kubectl create ns challenge-2`.
    2. Desplegamos el chart: `helm install --set ingress.enabled=false challenge-2 challenge-2/ -n challenge-2`.
