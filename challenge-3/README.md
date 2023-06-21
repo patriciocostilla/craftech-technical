@@ -1,7 +1,5 @@
 # Challenge 3
 
-> Quiero ver el sitio desplegado: [https://challenge-3-app-to5uzvhuqq-uc.a.run.app](https://challenge-3-app-to5uzvhuqq-uc.a.run.app)
-
 ## Introducción
 
 El objetivo del desafío es generar una imagen de contenedor de NGINX, con el agregado de que se debe modificar el archivo `index.html` que muestra en su configuración por defecto. 
