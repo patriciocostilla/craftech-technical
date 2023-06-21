@@ -223,7 +223,9 @@ A manera de ejemplo, realizaremos un despliegue utilizando GKE. Para esto, prime
 7. Ahora, podemos desplegar nuestra aplicación utilizando Helm desde la consola local.
    1. Creamos el namespace para la aplicación: `kubectl create ns challenge-2`.
    2. Desplegamos el chart: `helm install --set ingress.enabled=false challenge-2 challenge-2/ -n challenge-2`.
-      1. A los efectos de este práctico, no nos interesa exponer la aplicación hacia el exterior, por lo tanto realizamos un override de la configuración del `Ingress` para deshabilitarlo. Por lo tanto, si deseamos acceder a la aplicación deberíamos realizar un `port-forward` con `kubectl`. 
+      1. A los efectos de este práctico, no nos interesa exponer la aplicación hacia el exterior, por lo tanto realizamos un override de la configuración del `Ingress` para deshabilitarlo. 
+      2. Por lo tanto, si deseamos acceder a la aplicación deberíamos realizar un `port-forward` con `kubectl`:
+         1. `kubectl port-forward svc/challenge-2 8080:80 -n challenge-2`
 
 Finalmente, podemos revisar el estado del cluster y de las cargas de trabajo desplegadas desde la consola de GCP:
 
@@ -242,4 +244,3 @@ Finalmente, podemos revisar el estado del cluster y de las cargas de trabajo des
 
 * https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl?hl=es-419
 * https://cloud.google.com/sdk/docs/install?hl=es-419
-* 
