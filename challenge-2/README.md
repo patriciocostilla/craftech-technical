@@ -207,6 +207,39 @@ De la misma forma, para desinstalar el chart se debería ejecutar: `helm uninsta
 
 ### Despliegue en entorno cloud
 
-**Requerimientos previos:** Contar con acceso a una instancia de EKS (AWS) o GKE (GCP), además de los requerimientos previos indicados en la [sección anterior](#despliegue-con-kubernetes--helm). 
+**Requerimientos previos:** Contar con acceso a una instancia de EKS (AWS) o GKE (GCP), además de los requerimientos previos indicados en la [sección anterior](#despliegue-con-kubernetes--helm). Luego, simplemente se deberían realizar los pasos indicados en la [sección anterior](#despliegue-con-kubernetes--helm).
 
-1. Realizar los pasos indicados en la [sección anterior](#despliegue-con-kubernetes--helm).
+A manera de ejemplo, realizaremos un despliegue utilizando GKE. Para esto, primero debemos gestionar el acceso a la instancia correspondiente, necesitaremos:
+
+1. Habilitar, en GCP, la API de GKE.
+2. Instalar e inicializar la CLI de `gcloud`.
+3. Instalar `kubectx` y `kubens`, para facilitar el movimiento de contextos de Kubernetes.
+4. Crear un cluster de Kubernetes (se puede hacer desde la interfaz web de GCP o a través de `gcloud`).
+   1. Puede demorar hasta 5 minutos la creación del cluster.
+5. Instalar los componentes necesarios para conectarse a GKE desde `gcloud`:
+   1. `gcloud components install gke-gcloud-auth-plugin`
+6. Configurar la conexión con el cluster de GKE: `gcloud container clusters get-credentials CLUSTER_NAME --region=COMPUTE_REGION`.
+   1. A partir de este momento, podemos verificar con `kubectx` que tenemos acceso al cluster de GKE desde el entorno local. Por ejemplo:
+7. Ahora, podemos desplegar nuestra aplicación utilizando Helm desde la consola local.
+   1. Creamos el namespace para la aplicación: `kubectl create ns challenge-2`.
+   2. Desplegamos el chart: `helm install --set ingress.enabled=false challenge-2 challenge-2/ -n challenge-2`.
+      1. A los efectos de este práctico, no nos interesa exponer la aplicación hacia el exterior, por lo tanto realizamos un override de la configuración del `Ingress` para deshabilitarlo. Por lo tanto, si deseamos acceder a la aplicación deberíamos realizar un `port-forward` con `kubectl`. 
+
+Finalmente, podemos revisar el estado del cluster y de las cargas de trabajo desplegadas desde la consola de GCP:
+
+#### Estado general del cluster
+
+![Estado general del cluster](imgs/cluster.jpg)
+
+#### Cargas de trabajo desplegadas
+
+![Cargas de trabajo desplegadas](imgs/workload.jpg)
+#### Servicios existentes
+
+![Servicios existentes](imgs/services.jpg)
+
+#### Referencias
+
+* https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl?hl=es-419
+* https://cloud.google.com/sdk/docs/install?hl=es-419
+* 
